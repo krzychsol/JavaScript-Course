@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Zmień wartość "lang" z 'en' na 'pl' -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="bootstrap.css">
+  <title>
+    Tytuł strony / Page tile
+  </title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <canvas id="canvas"></canvas>
+    <a class="navbar-brand nav-logo" href="#"><i class="fa-solid fa-cow"></i>Agroturystyka "Olszyny"</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Oferta
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Zarezerwuj</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="parent">
+    <div class="div1">
+      <div class="card">
+        <figure class="main-item">
+            <picture>
+                <img src="pic1.webp" alt="Picture1">
+            </picture>
+            <figcaption>Dostępne terminy</figcaption>
+        </figure>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Miesiąc</th>
+              <th scope="col">Dni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>VII</td>
+              <td>VIII</td>
+            </tr>
+            <tr>
+              <td>14-21, 30-31</td>
+              <td>1-12</td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-primary card-btn">Zarezerwuj</button>
+    </div>
+    </div>
+    <div class="div2">
+      <div class="card">
+        <figure class="main-item">
+            <picture>
+                <img src="pic2.jpg" alt="Picture2">
+            </picture>
+            <figcaption>Ceny noclegu</figcaption>
+        </figure>
+        <ul class="card-list">
+          <li class="card-list-item">Pokój 1-osobowy - 100 zł.</li>
+          <li class="card-list-item">Pokój 2-osobowy - 80 zł.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="div3">
+      <div class="card">
+        <figure class="main-item">
+            <picture>
+                <img src="pic3.jpg" alt="Picture3">
+            </picture>
+            <figcaption>Adres</figcaption>
+        </figure>
+        <p class="description-content">
+          Olszyny 1007,<br>
+          32-431 Olszyny
+        </p>
+    </div>
+    </div>
+    <div class="div4">
+      <div class="card">
+        <span class="description-content">Widok okolicy</span>
+        <iframe width="100%" height="350px" src="https://www.youtube.com/embed/aC6avafu4ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    </div>
+  </div>
+  <div id="form-container" class="d-flex flex-column justify-content-start">
+      <form id="rooms-form" class="mb-2 w-100">
+          <div class="rent-room">
+            <label for="rent-room" class="w-25">Rezerwacja pokoju:</label>
+            <div class="form-group me-4 w-50">
+                <input type="text" class="form-control me-2" id="rent-room-input" placeholder="room_id, customer_name">
+            </div>
+            <button id="rent-room-btn" class="btn btn-primary flex-fill">Rezerwuj</button>
+          </div>
+          <div class="return-room">
+            <label for="return-room" class="w-25">Zwolnienie pokoju:</label>
+            <div class="form-group me-4 w-50">
+                <input type="text" class="form-control me-2" id="return-room-input" placeholder="room_id, customer_name">
+            </div>
+            <button id="return-room-btn" class="btn btn-primary flex-fill">Zwolnij</button>
+          </div>
+          <div class="all-rooms">
+            <label for="all-rooms" class="w-25">Pokaż pokoje:</label>
+            <button id="all-rooms-btn" class="btn btn-primary flex-fill">Pokaż pokoje</button>
+          </div>
+      </form>
+</div>
+  <footer class="footer">
+    <p>&copy;Krzysztof Solecki</p>
+    <p class="footer-below">
+      <i class="fa-solid fa-phone"></i><span>Telefon </span><a href="#">1222123121</a>
+      <i class="fa-regular fa-envelope email-contact"></i><span>Email </span><a href="#">example@gmail.com</a>
+    </p>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="logo.js"></script>
+  <script src="script.js" defer></script>
+</body>
+
+</html>
