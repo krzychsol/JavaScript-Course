@@ -43,7 +43,7 @@
             }
 
             render() {
-                return <div className={'alert alert-success m-3 w-75'}>
+                return <div className={'alert alert-success m-3 w-50'}>
                         <label>Counter→ <span style={{ color: "red", fontSize: '30px' }}>{this.state.count}</span></label>
                         <br/>
                         <button onClick={() => this.handleStartClick()}>Start</button>
@@ -112,7 +112,7 @@
             
             render() {
                 return (
-                <div className={'alert alert-dark m-3 w-75'}>
+                <div className={'alert alert-dark m-3 w-50'}>
                     <YellowComponent result={this.state.calculatedValue}/>
                     <RedComponent handleCalculatedValue={this.handleCalculatedValue}/>
                 </div>

@@ -21,7 +21,6 @@
   </head>
   <body>
     <form id="form">
-      <div id="root"></div>
       <h2>requestAnimationFrame()</h2>
       <label for="counter">Counter→</label>
       <output id="counter" style="font-size: 4vh; color: red;">0</output>
@@ -80,7 +79,7 @@
       }
 
       function step() {
-        document.forms[0].counter.value = i++;
+        document.getElementById('counter').value = i++;
         animation = window.requestAnimationFrame(step);
       }
 
@@ -120,46 +119,6 @@
         resultMain.value = calculatePrimes();
       });
       iterationsWorkerBtn.addEventListener('click', run_calculations);
-
-      class GreenComponent extends React.Component {
-            constructor(props) {
-                super(props);
-                this.state = { count: 0 };
-            }
-
-            handleStartClick() {
-                this.interval = setInterval(() => {
-                this.setState((prevState) => ({ count: prevState.count + 1 }));
-                }, 100);
-            }
-
-            handleStopClick() {
-                clearInterval(this.interval);
-            }
-
-            render() {
-                return <div className={'alert alert-success m-3 w-75'}>
-                        <label>Counter→ <span style={{ color: "red", fontSize: '30px' }}>{this.state.count}</span></label>
-                        <br/>
-                        <button onClick={() => this.handleStartClick()}>Start</button>
-                        <button onClick={() => this.handleStopClick()}>Stop</button>
-                    </div>
-            };
-        }
-
-        class App extends React.Component {
-            render() {
-                return (
-                <React.Fragment>
-                    <GreenComponent />
-                </React.Fragment>
-                );
-            }
-        }
-
-        const container = document.getElementById('root'); 
-        const root = ReactDOM.createRoot(container); 
-        root.render(<App />);
     </script>
   </body>
 </html>

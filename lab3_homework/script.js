@@ -20,24 +20,24 @@ const mockup = {
         type: "Bez łazienki",
         places: 4,
         img_url: "",
-        rent_by: null,
-        date: null
+        rent_by: "Artur Nowak",
+        date: "2023-05-15"
     },
     4:{
         room_id: 4,
         type: "Z łazienką",
         places: 2,
         img_url: "",
-        rent_by: null,
-        date: null
+        rent_by: "Maciej Kowalski",
+        date: "2023-05-20"
     },
     5:{
         room_id: 5,
         type: "Z łazienką",
         places: 6,
         img_url: "",
-        rent_by: null,
-        date: null
+        rent_by: "Andrzej Duda",
+        date: "2023-06-01"
     }
 };
 
@@ -48,7 +48,7 @@ function rentRoom(event) {
     const arguments = input.value.split(', ');
     if (arguments.length != 2) {
         console.log("%c Niepoprawna ilość argumentów. Oczekiwano 2.\nPrzykład argumentów: '23, Jan Kowalski'\n", "color: red");
-        return
+        return "error1";
     }
 
     const room_id = Number.parseInt(arguments[0]);
@@ -91,6 +91,7 @@ function rentRoom(event) {
     
     transaction.oncomplete = function () {
         console.log("Zamykanie transakcji ");
+        return "Udało się";
     };
 }
 
@@ -102,7 +103,7 @@ function returnRoom(event) {
     const arguments = input.value.split(', ');
     if (arguments.length != 2) {
         console.log("%c Niepoprawna ilość argumentów. Oczekiwano 2.\nPrzykład argumentów: '11, Jan Kowalski'\n", "color: orange");
-        return
+        return "error1";
     }
     
     const room_id = Number.parseInt(arguments[0]);
@@ -111,7 +112,7 @@ function returnRoom(event) {
     
     if (!mockup.hasOwnProperty(room_id)) {
         console.log("%c Nie ma takiego pokoju w bazie danych\n", "color: red");
-        return
+        return "nie ma takiego pokoju";
     }
     const room = mockup[room_id];
     
@@ -206,7 +207,7 @@ request.onupgradeneeded = function () {
             room_id: 1,
             type: "Z łazienką",
             places: 1,
-            img_url: "",
+            img_url: "https://unsplash.com/photos/oxeCZrodz78",
             rent_by: null,
             date: null
         },
@@ -214,7 +215,7 @@ request.onupgradeneeded = function () {
             room_id: 2,
             type: "Bez łazienki",
             places: 3,
-            img_url: "",
+            img_url: "https://unsplash.com/photos/oxeCZrodz78",
             rent_by: "Jan Kowalski",
             date: "2023-05-01"
         },
@@ -222,25 +223,25 @@ request.onupgradeneeded = function () {
             room_id: 3,
             type: "Bez łazienki",
             places: 4,
-            img_url: "",
-            rent_by: null,
-            date: null
+            img_url: "https://unsplash.com/photos/oxeCZrodz78",
+            rent_by: "Artur Nowak",
+            date: "2023-05-15"
         },
         {
             room_id: 4,
             type: "Z łazienką",
             places: 2,
-            img_url: "",
-            rent_by: null,
-            date: null
+            img_url: "https://unsplash.com/photos/oxeCZrodz78",
+            rent_by: "Maciej Kowalski",
+            date: "2023-05-20"
         },
         {
             room_id: 5,
             type: "Z łazienką",
             places: 6,
-            img_url: "",
-            rent_by: null,
-            date: null
+            img_url: "https://unsplash.com/photos/oxeCZrodz78",
+            rent_by: "Andrzej Duda",
+            date: "2023-06-01"
         }
     ]
     for(item of mockup){
