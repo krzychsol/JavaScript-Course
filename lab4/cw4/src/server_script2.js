@@ -4,8 +4,6 @@ import fs from 'fs-extra';
 import { exec } from 'node:child_process';
 import './console_script2';
 
-//:TODO zaczytywac funkcje z pliku console_script2.js
-
 const server = http.createServer((req, res) => {
   if (req.url === '/') {
     res.setHeader('Content-Type', 'text/html');

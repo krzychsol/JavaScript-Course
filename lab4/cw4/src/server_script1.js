@@ -3,6 +3,7 @@
 
 import http from 'node:http';
 import { URL } from 'node:url';
+import querystring from 'node:querystring'
 
 /**
      * Handles incoming requests.
@@ -33,30 +34,31 @@ function requestListener(request, response) {
     /* Route "GET('/')" */
     /* ---------------- */
     if (url.pathname === '/' && request.method === 'GET') {
+        response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         // Generating the form if the relative URL is '/', and the GET method was used to send data to the server'
         /* ************************************************** */
         // Setting a response body
         response.write(`
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Your first page</title>
-  </head>
-  <body>
-    <main>
-      <h1>First application</h1>
-      <form method="GET" action="/submit">
-        <label for="name">Give your name</label>
-        <input name="name">
-        <br>
-        <input type="submit">
-        <input type="reset">
-      </form>
-    </main>
-  </body>
-</html>`);
+            <!DOCTYPE html>
+            <html lang="en">
+              <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Your first page</title>
+              </head>
+              <body>
+                <main>
+                  <h1>First application</h1>
+                  <form method="GET" action="/submit">
+                    <label for="name">Give your name</label>
+                    <input name="name">
+                    <br>
+                    <input type="submit">
+                    <input type="reset">
+                  </form>
+                </main>
+              </body>
+            </html>`);
         /* ************************************************** */
         response.end(); // The end of the response — send it to the browser
     }
@@ -68,14 +70,31 @@ function requestListener(request, response) {
         // Processing the form content, if the relative URL is '/submit', and the GET method was used to send data to the server'
         /* ************************************************** */
         // Creating an answer header — we inform the browser that the returned data is plain text
-        response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+        response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         /* ************************************************** */
         // Place given data (here: 'Hello <name>') in the body of the answer
         response.write(`Hello ${url.searchParams.get('name')}`); // "url.searchParams.get('name')" contains the contents of the field (form) named 'name'
         /* ************************************************** */
         response.end(); // The end of the response — send it to the browser
     }
+     /* ---------------------- */
+    /* Route "POST('/')" */
+    /* ---------------------- */
+    else if (url.pathname === '/' && request.method === 'POST') {
+      let body = '';
 
+      request.on('data', data => {
+        body += data;
+      })
+
+      request.on('end', () => {
+        body = querystring.parse(body);
+        response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+        response.write(`Hello ${body.name}`);
+        response.end();
+      });
+
+  }
     /* -------------------------- */
     /* If no route is implemented */
     /* -------------------------- */

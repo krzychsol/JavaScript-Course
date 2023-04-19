@@ -94,6 +94,72 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="filePath"><span class="type-signature">(constant) </span>filePath<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Path to file witch stores number of script runs
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="console_script2.js.html">console_script2.js</a>, <a href="console_script2.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -104,7 +170,7 @@
     
 
     
-    <h4 class="name" id="requestListener"><span class="type-signature"></span>requestListener<span class="signature">(request, response)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="readCounterAsync"><span class="type-signature"></span>readCounterAsync<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +178,271 @@
 
 
 <div class="description">
-    Handles incoming requests.
+    Asynchronously read value from file counter.txt
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="console_script2.js.html">console_script2.js</a>, <a href="console_script2.js.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="readCounterSync"><span class="type-signature"></span>readCounterSync<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Synchronously read value from file counter.txt
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="console_script2.js.html">console_script2.js</a>, <a href="console_script2.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="run"><span class="type-signature">(async) </span>run<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Main function
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="console_script2.js.html">console_script2.js</a>, <a href="console_script2.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="writeCounterAsync"><span class="type-signature"></span>writeCounterAsync<span class="signature">(counter)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Asynchronously write value to file counter.txt
 </div>
 
 
@@ -148,13 +478,13 @@
 
         <tr>
             
-                <td class="name"><code>request</code></td>
+                <td class="name"><code>counter</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">IncomingMessage</span>
+<span class="param-type">int</span>
 
 
             
@@ -164,30 +494,7 @@
 
             
 
-            <td class="description last">Input stream — contains data received from the browser, e.g,. encoded contents of HTML form fields.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>response</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">ServerResponse</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Output stream — put in it data that you want to send back to the browser.The answer sent by this stream must consist of two parts: the header and the body.<ul> <li>The header contains, among others, information about the type (MIME) of data contained in the body. <li>The body contains the correct data, e.g. a form definition.</ul></td>
+            <td class="description last">value from file counter.txt</td>
         </tr>
 
     
@@ -218,12 +525,142 @@
     
 
     
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li><a href="mailto:polak@agh.edu.pl">Stanisław Polak</a></li>
-        </ul>
-    </dd>
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="console_script2.js.html">console_script2.js</a>, <a href="console_script2.js.html#line53">line 53</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="writeCounterSync"><span class="type-signature"></span>writeCounterSync<span class="signature">(counter)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Synchronously write value to file counter.txt
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>counter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">value from file counter.txt</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     
@@ -235,7 +672,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server_script1.js.html">server_script1.js</a>, <a href="server_script1.js.html#line20">line 20</a>
+        <a href="console_script2.js.html">console_script2.js</a>, <a href="console_script2.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -281,13 +718,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#requestListener">requestListener</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#filePath">filePath</a></li><li><a href="global.html#readCounterAsync">readCounterAsync</a></li><li><a href="global.html#readCounterSync">readCounterSync</a></li><li><a href="global.html#run">run</a></li><li><a href="global.html#writeCounterAsync">writeCounterAsync</a></li><li><a href="global.html#writeCounterSync">writeCounterSync</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 15 2023 12:34:30 GMT+0200 (czas środkowoeuropejski letni)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 19 2023 12:21:34 GMT+0200 (czas środkowoeuropejski letni)
 </footer>
 
 <script> prettyPrint(); </script>

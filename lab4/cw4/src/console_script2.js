@@ -2,10 +2,11 @@ import fs from 'fs-extra';
 import readLine from 'readline';
 import { exec } from 'node:child_process';
 
-//:TODO przerywac po wcisnieciu CTRL+D
 
+/** Path to file witch stores number of script runs */
 const filePath = 'counter.txt';
 
+/** Synchronously read value from file counter.txt */
 function readCounterSync() {
   try {
     const counter = fs.readFileSync(filePath, 'utf8');
@@ -20,10 +21,14 @@ function readCounterSync() {
   }
 }
 
+/** Synchronously write value to file counter.txt 
+ * @param {int} counter - value from file counter.txt
+*/
 function writeCounterSync(counter) {
   fs.writeFileSync(filePath, counter.toString());
 }
 
+/** Asynchronously read value from file counter.txt */
 function readCounterAsync() {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
@@ -42,6 +47,9 @@ function readCounterAsync() {
   });
 }
 
+/** Asynchronously write value to file counter.txt 
+ * @param {int} counter - value from file counter.txt
+*/
 function writeCounterAsync(counter) {
   return new Promise((resolve, reject) => {
     fs.writeFile(filePath, counter.toString(), (err) => {
@@ -54,44 +62,47 @@ function writeCounterAsync(counter) {
   });
 }
 
+/** Main function  */
 async function run() {
-  const option = process.argv[2];
-  let readCounter, writeCounter;
-  if (option === '--sync') {
-    readCounter = readCounterSync;
-    writeCounter = writeCounterSync;
-  } else if (option === '--async') {
-    readCounter = readCounterAsync;
-    writeCounter = writeCounterAsync;
-  } else {
-    // Execute system commands from stdin
-    const rl = readLine.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
-    for await (const command of rl) {
-      exec(command, (err, stdout, stderr) => {
-        if (err) {
-          console.log(`error: ${err.message}`);
-          return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
+    const option = process.argv[2];
+    let readCounter, writeCounter;
+    if (option === "--sync") {
+        readCounter = readCounterSync;
+        writeCounter = writeCounterSync;
+    } else if (option === "--async") {
+        readCounter = readCounterAsync;
+        writeCounter = writeCounterAsync;
+    } else {
+        /**Execute system function from stdin */
+        const rl = readLine.createInterface({
+          input: process.stdin,
+          output: process.stdout,
       });
-    }
-    return;
+      for await (const command of rl) {
+          exec(command, (err, stdout, stderr) => {
+              if (err) {
+                  console.log(`error: ${err.message}`);
+                  return;
+              }
+              if (stderr) {
+                  console.log(`stderr: ${stderr}`);
+                  return;
+              }
+              console.log(`stdout: ${stdout}`);
+        });
+      }
+      return;
   }
 
+  /** Read value from counter and then increment it and write new value to file */
   let counter = await readCounter();
   console.log(`Counter: ${counter}`);
   counter++;
   writeCounter(counter);
-  console.log('Counter updated.');
+  console.log("Counter updated.");
 }
 
+/** Handle error while run script */
 run().catch((err) => {
   console.error(err);
   process.exit(1);
