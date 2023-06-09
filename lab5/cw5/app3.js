@@ -27,18 +27,32 @@ app.use(express.static(__dirname + '/public'));
 /* ******** */
 
 app.get('/', async function (request, response) {
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient('mongodb+srv://root:root@cluster0.yezvdsh.mongodb.net/');
     await client.connect();
 
     const db = client.db('agh');
     const collection = db.collection('students');
     const student = await collection.find({}).toArray();
 
-    response.render('index', { students: students }); // Render the 'index' view
+    response.render('index', { students: student }); // Render the 'index' view
     client.close();
 });
 
 /* ************************************************ */
+
+
+
+app.get('/', async function (request, response) {
+    const client = new MongoClient('mongodb+srv://root:root@cluster0.yezvdsh.mongodb.net/');
+    await client.connect();
+
+    const db = client.db('agh');
+    const collection = db.collection('students');
+    const student = await collection.find({}).toArray();
+
+    response.render('index', { students: student }); // Render the 'index' view
+    client.close();
+});
 
 app.listen(8000, function () {
     console.log('The server was started on port 8000');

@@ -1,115 +1,135 @@
 import http from 'node:http';
 import { URL } from 'node:url';
-import fs from 'fs-extra';
-import { exec } from 'node:child_process';
-import './console_script2';
+import counter from './counter.cjs';
 
-const server = http.createServer((req, res) => {
-  if (req.url === '/') {
-    res.setHeader('Content-Type', 'text/html');
-    res.write('<form method="post" action="/submit">');
-    res.write('<label for="mode">Tryb:</label>');
-    res.write('<select id="mode" name="mode">');
-    res.write('<option value="-">-</option>');
-    res.write('<option value="sync">sync</option>');
-    res.write('<option value="async">async</option>');
-    res.write('</select>');
-    res.write('<br>');
-    res.write('<label for="input">Komendy:</label>');
-    res.write('<textarea id="input" name="input"></textarea>');
-    res.write('<br>');
-    res.write('<button type="submit">Wykonaj</button>');
-    res.write('</form>');
-    res.end();
-  } else if (req.url === '/submit' && req.method === 'POST') {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
-    });
-    req.on('end', () => {
-      const mode = body.split('&')[0].split('=')[1];
-      const input = decodeURIComponent(body.split('&')[1].split('=')[1]);
+function requestListener(request, response) {
+    console.log('--------------------------------------');
+    console.log(`The relative URL of the current request: ${request.url}`);
+    console.log(`Access method: ${request.method}`);
+    console.log('--------------------------------------');
+    
+    const url = new URL(request.url, `http://${request.headers.host}`);
 
-      if (mode === '-') {
-        const output = execCommand(input);
-        res.setHeader('Content-Type', 'text/plain');
-        res.write(`<pre>${output}</pre>`);
-        res.end();
-      } else if (mode === 'sync') {
-        const output = readWriteSync();
-        res.setHeader('Content-Type', 'text/html');
-        res.write(`<p>Liczba uruchomien: ${output}</p>`);
-        res.end();
-      } else if (mode === 'async') {
-        readWriteAsync((err, output) => {
-          if (err) {
-            res.setHeader('Content-Type', 'text/plain');
-            res.write('<p>Blad odczytu/zapisu pliku</p>');
-          } else {
-            res.setHeader('Content-Type', 'text/html');
-            res.write(`<p>Liczba uruchomien: ${output}</p>`);
-          }
-          res.end();
-        });
-      }
-    });
-  } else {
-    res.statusCode = 404;
-    res.end();
-  }
-});
+    if (url.pathname === '/' && request.method === 'GET') {
+        response.write(`
+            <!DOCTYPE html>
+            <html lang="en">
+                <head>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <title>Exercise 2</title>
+                </head>
+                <body style="padding: 3rem">
+                    <main>
+                        <h1>Exercise 2 server</h1>
+                        <form method="GET" action="/submit">
+                            <select name="mode" class="form-select">
+                                <option value="" selected>-</option>
+                                <option value="sync">sync</option>
+                                <option value="async">async</option>
+                            </select>
+                            <textarea name="command-list" class="form-control"></textarea>
+                            <br>
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </form>
+                    </main>
+                </body>
+            </html>
+        `);
 
-function readWriteSync() {
-  let count = 0;
-  try {
-    const data = fs.readFileSync('counter.txt', 'utf-8');
-    count = parseInt(data) + 1;
-    fs.writeFileSync('counter.txt', count.toString());
-  } catch (err) {
-    console.error(err);
-  }
-  return count;
-}
-
-function readWriteAsync(callback) {
-  fs.readFile('counter.txt', 'utf-8', (err, data) => {
-    if (err) {
-      callback(err);
-    } else {
-      let count = parseInt(data) + 1;
-      fs.writeFile('counter.txt', count.toString(), err => {
-        if (err) {
-          callback(err);
-        } else {
-          callback(null, count);
-        }
-      });
+        response.end();
     }
-  });
+    else if (url.pathname === '/submit' && request.method === 'GET') {
+        const mode = url.searchParams.get('mode');
+        const commandList = url.searchParams.get('command-list');
+        let output = '';
+        
+        if (mode === 'sync') {
+            output = `Current counter state: ${counter.countSync()}`;
+        }
+        else if (mode === 'async') {
+            counter.countAsync().then(res => {
+                output = `Current counter state: ${res}`;
+                
+                response.write(`
+                    <!DOCTYPE html>
+                    <html lang="en">
+                        <head>
+                            <meta charset="utf-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1">
+                            <title>Exercise 2 - output</title>
+                        </head>
+                        <body style="padding: 3rem">
+                            <output ${!mode ? 'style="font-family: monospace"' : ''}>
+                                ${output}
+                            </output>
+                        </body>
+                    </html>
+                `);
+                response.end();
+            });
+        }
+        else if (!mode) {
+            const list = commandList.split('\n').map(command => command.trim());
+            
+            counter.exec(list).then(res => {
+                output = res
+                        .reduce((acc, curr) => acc + curr + '\n', '')
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#039;");
+
+                response.write(`
+                    <!DOCTYPE html>
+                    <html lang="en">
+                        <head>
+                            <meta charset="utf-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1">
+                            <title>Exercise 2 - output</title>
+                        </head>
+                        <body style="padding: 3rem">
+                            <output ${!mode ? 'style="font-family: monospace; white-space: pre"' : ''}>
+                                ${output}
+                            </output>
+                           
+                        </body>
+                    </html>
+                `);
+                response.end();
+            });
+        }
+
+        if (mode === 'sync') {
+            response.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                    <head>
+                        <meta charset="utf-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1">
+                        <title>Exercise 2 - output</title>
+                    </head>
+                    <body style="padding: 3rem">
+                        <output ${!mode ? 'style="font-family: monospace"' : ''}>
+                            ${output}
+                        </output>
+                    </body>
+                </html>
+            `);
+
+            response.end();
+        }
+       
+    }
+    else {
+        response.writeHead(501, { 'Content-Type': 'text/plain; charset=utf-8' });
+        response.write('Error 501: Not implemented');
+        response.end();
+    }
 }
 
-function execCommand(command) {
-  try {
-    const output = exec(command, (err, stdout, stderr) => {
-      if (err) {
-        console.log(`error: ${err.message}`);
-        return `${err.message}`;
-      }
-      if (stderr) {
-          console.log(`stderr: ${stderr}`);
-          return `${stderr}`;
-      }
-      console.log(`stdout: ${stdout}`);
-      return `${stdout}`;
-    });
-    console.log(output.toString);
-    return output.toString();
-  } catch (err) {
-    console.error(err);
-    return '';
-  }
-}
-
-server.listen(8000, () => {
-  console.log('Server listening on port 8000');
-});
+const server = http.createServer(requestListener); // The 'requestListener' function is defined above
+server.listen(8000);
+console.log('The server was started on port 8000');
+console.log('To stop the server, press "CTRL + C"');

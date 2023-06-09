@@ -43,6 +43,11 @@ app.get('/', function (request, response) {
 
 /* ************************************************ */
 
+app.post('/', function (request, response) {
+    response.set('Content-Type', 'text/plain');
+    response.send(`Hello ${request.body.name}`);
+  });
+
 app.listen(8000, function () {
     console.log('The server was started on port 8000');
     console.log('To stop the server, press "CTRL + C"');

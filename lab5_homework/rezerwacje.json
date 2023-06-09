@@ -1,0 +1,44 @@
+{
+    "rezerwacje": [
+        {
+            "imie": "Jan",
+            "nazwisko": "Kowalski",
+            "rodzaj_pokoju": "standardowy",
+            "typ_pokoju": "jednoosobowy",
+            "data_poczatku": "2023-06-01",
+            "data_konca": "2023-06-05"
+        },
+        {
+            "imie": "Anna",
+            "nazwisko": "Nowak",
+            "rodzaj_pokoju": "luksusowy",
+            "typ_pokoju": "dwuosobowy",
+            "data_poczatku": "2023-07-10",
+            "data_konca": "2023-07-15"
+        },
+        {
+            "imie": "Marta",
+            "nazwisko": "Wiśniewska",
+            "rodzaj_pokoju": "standardowy",
+            "typ_pokoju": "dwuosobowy",
+            "data_poczatku": "2023-08-20",
+            "data_konca": "2023-08-25"
+        },
+        {
+            "imie": "Piotr",
+            "nazwisko": "Kowalczyk",
+            "rodzaj_pokoju": "luksusowy",
+            "typ_pokoju": "jednoosobowy",
+            "data_poczatku": "2023-09-05",
+            "data_konca": "2023-09-10"
+        },
+        {
+            "imie": "Karolina",
+            "nazwisko": "Nowacka",
+            "rodzaj_pokoju": "standardowy",
+            "typ_pokoju": "dwuosobowy",
+            "data_poczatku": "2023-10-15",
+            "data_konca": "2023-10-20"
+        }
+    ]
+}
