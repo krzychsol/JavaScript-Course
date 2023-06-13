@@ -1,0 +1,44 @@
+doctype html
+html
+    include ./head.pug
+    body
+        include ./nav.pug
+        main(class='container')
+            div(id='room-container' class='section accordion p-4')
+                h2(class='heading p-2') Pokoje
+                ul(class='room-list list row')
+                    each room, i in rooms
+                        li(class='col-lg-4 col-md-6 p-2')
+                            div(class='accordion-item')
+                                button(class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target=`#room-${i}` aria-expanded='false' aria-controls=`room-${i}`)= room.name
+                                div(id=`room-${i}` class='accordion-collapse collapse' data-bs-parent='#room-container')
+                                    div(class='accordion-body')
+                                        div(class='room-content' data-id=room._id)
+                                            p(class='card-text')= `Rodzaj pokoju: ${room.type}`
+                                            p(class='card-text')= `Liczba miejsc: ${room.noPlaces}`
+                                            p(class='card-text')= `Cena: ${room.price}`
+                                            p(class='card-text')= `Opis: ${room.description}`
+                                            p(class='card-text')= `Dostępność: ${room.availability}`
+                                            p(class='card-text')= `ID: ${room._id}`
+                                            div(class='button-container d-flex')
+                                                button(class='btn btn-primary reservation-button') Zarezerwuj
+            div(class='section p-4')
+                h2(class='heading p-2') Aktualne rezerwacje
+                ul(class='reservation-list list row')
+                    each reservation, i in reservations ? reservations : []
+                        li(class='col-lg-4 col-md-6 p-2')
+                            div(class='accordion-item')
+                                button(class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target=`#reservation-${i}` aria-expanded='false' aria-controls=`room-${i}`)= reservation.name
+                                div(id=`reservation-${i}` class='accordion-collapse collapse' data-bs-parent='#reservation-container')
+                                    div(class='accordion-body')
+                                        div(class='room-content' data-id=reservation._id)
+                                            p(class='card-text')= `Rodzaj pokoju: ${reservation.type}`
+                                            p(class='card-text')= `Liczba miejsc: ${reservation.noPlaces}`
+                                            p(class='card-text')= `Cena: ${reservation.price}`
+                                            p(class='card-text')= `Opis: ${reservation.description}`
+                                            p(class='card-text')= `Dostępność: ${reservation.availability}`
+                                            p(class='card-text')= `ID: ${reservation._id}`
+                                            div(class='button-container d-flex')
+                                                button(class='btn btn-primary return-button') Anuluj rezerwację
+    include ./body-scripts.pug
+                                          

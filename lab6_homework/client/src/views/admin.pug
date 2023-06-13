@@ -1,0 +1,37 @@
+doctype html
+html
+    include ./head.pug
+    body
+        include ./nav.pug
+        div(class='container')
+            h2(class='page-heading') Panel Administratora
+            form(id='request-form' class='row py-4')
+                select(id='request-type' name='request_type' class='form-select form-control col-12 col-md-4')
+                    option(value='') Wypierz opcje
+                    option(value='1') Dodaj pokój 
+                    option(value='2') Usuń pokój
+                    option(value='3') Edytuj pokój
+                    option(value='4') Pokaż wszystkie pokoje
+                input(
+                    id='request-button'
+                    type='button'
+                    class='btn btn-primary col-12 col-md-4'
+                    value='Wyślij'
+                )
+
+            form(id='add-room-form' class='row py-4')
+                each value in addRoomTextInputs
+                    div(class='input-group flex-nowrap')
+                        span(class='input-group-text')= value
+                        input(id=`${value.toLowerCase()}-input` class='form-control' type='text' aria-label=value)
+                div(class='input-group flex-nowrap')
+                    select(id='room-type-select' class='form-select' aria-label='Room type select')
+                        option(value='') Wybierz rodzaj pokoju
+                        option(value='standard' selected) Standardowy
+                        option(value='lexury') Luksusowy
+                    select(id='room-no-places-type-select' class='form-select' aria-label='Room no places select')
+                        option(value='') Wybierz typ pokoju
+                        option(value='1') Jednoosobowy
+                        option(value='2') Dwuosobowy
+                input(id='form-button' class='btn btn-primary' type='button' value='Add new')
+        include ./body-scripts.pug

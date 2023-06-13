@@ -1,0 +1,20 @@
+doctype html 
+html
+    include ./head.pug
+    body
+        include ./nav.pug
+        div(class='container')
+            h2(class='page-heading') Panel Gościa
+            form(id='request-form' class='row py-4')
+                select(id='request-type' name='request_type' class='form-select form-control col-12 col-md-4')
+                    option(value='') Wybierz opcje
+                    option(value='1') Rezerwacja pokoju
+                    option(value='2') Anulowanie rezerwacji
+                input(
+                    id='request-button'
+                    type='button'
+                    class='btn btn-primary col-12 col-md-4'
+                    value='Wyślij'
+                )
+        include ./body-scripts.pug     
+        

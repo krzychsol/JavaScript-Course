@@ -1,0 +1,19 @@
+nav(class='navbar navbar-expand-lg navbar-light bg-light')
+    canvas(id='canvas')
+    a(class='navbar-brand nav-logo' href='#')
+        i(class='fa-solid fa-cow') Agroturystyka "Olszyny"
+    button(class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
+        span(class='navbar-toggler-icon')
+    div(class='collapse navbar-collapse justify-content-end' id='navbarNavDropdown')
+        ul(class='navbar-nav')
+            li(class='nav-item dropdown')
+                a(class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false") Oferta
+                div(class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink")
+                    a(class="dropdown-item" href=`${APPLICATION_URL}/`) Strona główna
+                    a(class="dropdown-item" href=`${APPLICATION_URL}/guest`) Panel Gościa
+                    a(class="dropdown-item" href=`${APPLICATION_URL}/admin`) Panel Admina
+            li(class='nav-item')
+                a(class='nav-link' href='#') Zarezerwuj
+
+                    
