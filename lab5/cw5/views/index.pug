@@ -17,7 +17,8 @@ html(lang='en')
             table(style="border: 2px solid lightgrey; border-collapse:collapse;width: 400px;height: 130px")
                 thead(style="border: 2px solid lightgrey;") 
                     th Nazwisko
-                    th Imię 
+                    th Imię
+                    if 
                 each student in students 
                     tr(style="border: 2px solid lightgrey;text-align:center;")
                         td= student.lname
