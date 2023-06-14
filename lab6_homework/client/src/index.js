@@ -5,10 +5,10 @@ const fetch = require("node-fetch");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const APPLICATION_URL = process.env.APPLICATION_URL || `http://localhost:${PORT}`;
+const APPLICATION_URL = `http://localhost:${PORT}`;
 const SERVER_URL = process.env.SERVER_URL || 'http://localhost:8080';
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 

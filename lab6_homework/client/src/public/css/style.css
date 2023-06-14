@@ -13,6 +13,10 @@ body{
     height: 250vh;
 }
 
+h2{
+  color: white;
+}
+
 .main-item picture img{
     width: 450px;
     height: fit-content;

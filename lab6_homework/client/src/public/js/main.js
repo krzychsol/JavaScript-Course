@@ -84,14 +84,14 @@ const deleteRoom = async event => {
     }
 }
 
-document.querySelector('.reserve-button').forEach(button => {
+Array.from(document.querySelector('.reserve-button')).forEach(button => {
     button.addEventListener('click', reserveRoom);
 });
 
-document.querySelector('.return-button').forEach(button => {
+Array.from(document.querySelector('.return-button')).forEach(button => {
     button.addEventListener('click', returnRoom);
 });
 
-document.querySelector('.delete-button').forEach(button => {
+Array.from(document.querySelector('.delete-button')).forEach(button => {
     button.addEventListener('click', deleteRoom);
 });
